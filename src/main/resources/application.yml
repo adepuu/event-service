@@ -1,0 +1,36 @@
+server:
+  port: ${APP_PORT}
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: event-service
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  graphql:
+    servlet:
+      mapping: /graphql
+    graphiql:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: [ "prometheus", "health" ]
+
+rsa:
+  private-key: "classpath:certs/private-key.pem"
+  public-key: "classpath:certs/public-key.pem"
