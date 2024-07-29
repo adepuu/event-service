@@ -15,10 +15,10 @@ VALUES ('Music'),
 
 -- Insert users
 INSERT INTO users (username, email, password, role)
-VALUES ('john_doe', 'john.doe@example.com', 'hashed_password_1', 'organizer'),
-       ('jane_smith', 'jane.smith@example.com', 'hashed_password_2', 'admin'),
-       ('mike_wilson', 'mike.wilson@example.com', 'hashed_password_3', 'user'),
-       ('sarah_johnson', 'sarah.johnson@example.com', 'hashed_password_4', 'organizer');
+VALUES ('john_doe', 'john.doe@example.com', '$2a$10$gGOV0L5.LLm3.28R450AwOWxkJcP2hPKInpq7kjNkWzr00AJ59SGC', 'ORGANIZER'),
+       ('jane_smith', 'jane.smith@example.com', '$2a$10$gGOV0L5.LLm3.28R450AwOWxkJcP2hPKInpq7kjNkWzr00AJ59SGC', 'ADMIN'),
+       ('mike_wilson', 'mike.wilson@example.com', '$2a$10$gGOV0L5.LLm3.28R450AwOWxkJcP2hPKInpq7kjNkWzr00AJ59SGC', 'USER'),
+       ('sarah_johnson', 'sarah.johnson@example.com', '$2a$10$gGOV0L5.LLm3.28R450AwOWxkJcP2hPKInpq7kjNkWzr00AJ59SGC', 'ORGANIZER');
 
 -- Insert events
 INSERT INTO events (title, description, start_time, end_time, venue_id, category_id, organizer_id)

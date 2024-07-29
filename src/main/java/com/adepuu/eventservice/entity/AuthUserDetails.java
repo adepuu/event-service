@@ -1,22 +1,28 @@
 package com.adepuu.eventservice.entity;
 
 import lombok.Data;
+import lombok.extern.java.Log;
+
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
+@Log
 @Data
 public class AuthUserDetails implements UserDetails {
     private final String username;
     private final String password;
     private final UserRoles role;
 
-    @Override
+     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + role));
+        ArrayList<GrantedAuthority> authorities = new ArrayList<>();
+
+        authorities.add(() -> this.getRole().toString());
+        log.info("Authorities: " + authorities.toString());
+        return authorities;
     }
 
     @Override

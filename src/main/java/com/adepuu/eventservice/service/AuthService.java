@@ -47,7 +47,7 @@ public class AuthService {
                 .issuedAt(now)
                 .expiresAt(now.plus(10, ChronoUnit.HOURS))
                 .subject(authentication.getName())
-                .claim("authorities", authorities)
+                .claim("scope", authorities)
                 .claim("username", userDetails.getUsername())
                 .build();
 

@@ -8,6 +8,7 @@ type Query {
     user(id: ID!): User
     users(limit: Int, offset: Int): [User!]!
     me: User
+    secrit: String!
 }
 
 type Mutation {
