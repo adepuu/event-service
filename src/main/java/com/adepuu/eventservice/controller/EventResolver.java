@@ -26,8 +26,6 @@ public class EventResolver {
     log.info("Handling request for events with page: " + page + " and size: " + size);
     var result = eventService.getAllEvents(pageable, eventName, categoryId, organizerId);
     log.info("Returning " + result.getTotalElements() + " events");
-    log.info("Contents: " + result.getContent());
-    log.info(result.toString());
     var resp = new EventListResponse();
     resp.setEvents(result.getContent());
     resp.setPageSize(result.getSize());
