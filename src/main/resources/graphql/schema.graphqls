@@ -1,6 +1,13 @@
 type Query {
     event(id: ID!): Event
-    events(limit: Int, offset: Int): [Event!]!
+    events(
+        page: Int = 0,
+        size: Int = 10,
+        sort: String,
+        eventName: String,
+        categoryId: ID,
+        organizerId: ID
+    ): EventPage!
     category(id: ID!): Category
     categories: [Category!]!
     venue(id: ID!): Venue
@@ -37,15 +44,26 @@ type Mutation {
     logout: Boolean!
 }
 
+type EventPage {
+    events: [Event!]!
+    pageSize: Int!
+    currentPage: Int!
+    totalPages: Int!
+    totalEvents: Int!
+    hasNext: Boolean!
+    hasPrevious: Boolean!
+}
+
+
 type Event {
     id: ID!
     title: String!
     description: String
-    startTime: DateTime!
-    endTime: DateTime!
+    startTime: Instant!
+    endTime: Instant!
     venue: Venue!
     category: Category!
-    organizer: User!
+    organizerId: ID!
 }
 
 type Category {
@@ -84,8 +102,8 @@ type AuthPayload {
 input CreateEventInput {
     title: String!
     description: String
-    startTime: DateTime!
-    endTime: DateTime!
+    startTime: Instant!
+    endTime: Instant!
     venueId: ID!
     categoryId: ID!
     organizerId: ID!
@@ -94,8 +112,8 @@ input CreateEventInput {
 input UpdateEventInput {
     title: String
     description: String
-    startTime: DateTime
-    endTime: DateTime
+    startTime: Instant
+    endTime: Instant
     venueId: ID
     categoryId: ID
     organizerId: ID
@@ -140,7 +158,4 @@ input UpdateUserInput {
     role: UserRole
 }
 
-scalar DateTime
-@specifiedBy(url:
-"https://scalars.graphql.org/andimarek/date-time.html"
-)
+scalar Instant
